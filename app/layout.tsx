@@ -1,25 +1,39 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Navbar from './components/Navbar/Navbar'
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Navbar from "./components/Navbar/Navbar";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: 'GitHub Clone By Amaan Bhati',
-  description: 'GitHub landing page, meticulously crafted with Next.js, Tailwind CSS, and TypeScript. It boasts pixel-perfect visual fidelity, replicating the originals text animations, fonts, colors, and even animations. Built on top of Next.js, Tailwind CSS, and TypeScript.',
-}
+export const metadata = {};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
+      <Head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CK20GKH878"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CK20GKH878');
+            `,
+          }}
+        />
+      </Head>
       <body className={inter.className}>
-        {/* <Navbar/> */}
         {children}
-        </body>
+      </body>
     </html>
-  )
+  );
 }
