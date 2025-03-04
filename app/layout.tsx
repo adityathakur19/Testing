@@ -1,11 +1,8 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar/Navbar";
-import Head from "next/head";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {};
 
 export default function RootLayout({
   children,
@@ -14,13 +11,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         {/* Google Analytics */}
-        <script
-          async
+        <Script
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-CK20GKH878"
-        ></script>
-        <script
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -30,10 +29,8 @@ export default function RootLayout({
             `,
           }}
         />
-      </Head>
-      <body className={inter.className}>
-        {children}
-      </body>
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
